@@ -40,7 +40,7 @@
 	<title>Sapper project template</title>
 </svelte:head>
 
-<h1>Atur</h1>
+<h1>Tere Tulemast!</h1>
 
 <figure>
 	<img alt="Success Kid" src="{successkid}">
