@@ -50,7 +50,7 @@
 
 <nav>
 	<ul>
-
+		<li><a rel=prefetch aria-current="{segment === 'login' ? 'page' : undefined}" href="login">Log In</a></li>
 		<li><a rel=prefetch aria-current="{segment === 'register' ? 'page' : undefined}" href="register">Register</a></li>
 	</ul>
 </nav>
