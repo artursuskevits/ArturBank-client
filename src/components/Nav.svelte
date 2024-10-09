@@ -61,6 +61,7 @@
 <nav>
 	<ul>
 		{#if $session.token}
+			<li><a rel="prefetch" aria-current="{segment === 'overview' ? 'page' : undefined}" href="overview">Overview</a></li>
 			<li><a rel="prefetch" aria-current="{segment === 'logout' ? 'page' : undefined}" href="#" on:click|preventDefault={logout}>Log Out</a></li>
 		{:else}
 			<li><a rel="prefetch" aria-current="{segment === 'login' ? 'page' : undefined}" href="login">Log In</a></li>
