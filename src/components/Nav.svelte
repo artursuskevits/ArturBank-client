@@ -1,5 +1,15 @@
 <script>
 	export let segment;
+
+	import { goto, stores } from '@sapper/app';
+	import { post } from 'utils.js';
+	const { page, session } = stores();
+
+	async function logout() {
+		await post(`auth/logout`);
+		$session.token  = null;
+		goto('/');
+	}
 </script>
 
 <style>
@@ -50,7 +60,11 @@
 
 <nav>
 	<ul>
-		<li><a rel=prefetch aria-current="{segment === 'login' ? 'page' : undefined}" href="login">Log In</a></li>
-		<li><a rel=prefetch aria-current="{segment === 'register' ? 'page' : undefined}" href="register">Register</a></li>
+		{#if $session.token}
+			<li><a rel="prefetch" aria-current="{segment === 'logout' ? 'page' : undefined}" href="#" on:click|preventDefault={logout}>Log Out</a></li>
+		{:else}
+			<li><a rel="prefetch" aria-current="{segment === 'login' ? 'page' : undefined}" href="login">Log In</a></li>
+			<li><a rel="prefetch" aria-current="{segment === 'register' ? 'page' : undefined}" href="register">Register</a></li>
+		{/if}
 	</ul>
 </nav>
