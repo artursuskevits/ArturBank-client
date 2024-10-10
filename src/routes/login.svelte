@@ -58,8 +58,6 @@
                     <button class="btn btn-lg btn-primary pull-xs-right" type="submit">
                         Sign in
                     </button>
-                    <p>{JSON.stringify(transactions)}</p>
-
                 </form>
             </div>
         </div>
