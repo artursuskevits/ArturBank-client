@@ -1,38 +1,37 @@
 <script context="module">
-    export async function preload({parans}, {token}){
-        if (token){
-            this.redirect(302, '/overview')
+    export async function preload({ params }, { token }) {
+        if (token) {
+            this.redirect(302, `/overview`);
         }
     }
 </script>
 
 <script>
-    import { goto, stores } from '@sapper/app';
+    import {goto, stores} from '@sapper/app';
+    import {post} from 'utils.js';
 
-    import { post } from 'utils.js';
-
-    const { session } = stores();
+    const {session} = stores();
 
     let username = '';
     let password = '';
     let error = null;
 
-
     async function submit(event) {
-        const response = await post(`auth/login`, { username, password });
+        const response = await post(`auth/login`, {username, password});
 
         // TODO handle network errors
         error = response.error;
-        console.log(response)
+
         if (response.token) {
+            console.log(response)
             $session.token = response.token;
-            goto('/overview');
+            goto('/');
         }
     }
 </script>
 
 <svelte:head>
-    <title>Sign in • Conduit</title>
+    <title>Sign in • barBank</title>
 </svelte:head>
 
 <div class="auth-page">
@@ -47,18 +46,20 @@
                 {#if error}
                     <div class="alert alert-danger" role="alert">{error}</div>
                 {/if}
-
-
                 <form on:submit|preventDefault={submit}>
                     <fieldset class="form-group">
-                        <input class="form-control form-control-lg" type="text" required placeholder="Username" bind:value={username}>
+                        <input class="form-control form-control-lg" type="text" required placeholder="Username"
+                               bind:value={username}>
                     </fieldset>
                     <fieldset class="form-group">
-                        <input class="form-control form-control-lg" type="password" required placeholder="Password" bind:value={password}>
+                        <input class="form-control form-control-lg" type="password" required placeholder="Password"
+                               bind:value={password}>
                     </fieldset>
                     <button class="btn btn-lg btn-primary pull-xs-right" type="submit">
                         Sign in
                     </button>
+                    <p>{JSON.stringify(transactions)}</p>
+
                 </form>
             </div>
         </div>
